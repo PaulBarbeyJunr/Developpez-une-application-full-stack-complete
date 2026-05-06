@@ -9,6 +9,18 @@
   }
 }
 
+.topics-nav {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 16px;
+
+  a {
+    text-decoration: none;
+    color: #1976d2;
+    font-weight: 500;
+  }
+}
+
 .topics-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));

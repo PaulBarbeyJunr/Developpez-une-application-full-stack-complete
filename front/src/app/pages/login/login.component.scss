@@ -1,0 +1,42 @@
+.auth-container {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 24px;
+
+  h1 {
+    text-align: center;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  label {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  input {
+    padding: 8px;
+    font-size: 1rem;
+  }
+
+  .error {
+    color: red;
+    margin: 0;
+  }
+
+  button {
+    padding: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}

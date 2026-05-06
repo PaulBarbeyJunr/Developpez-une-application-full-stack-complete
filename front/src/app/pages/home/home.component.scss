@@ -4,4 +4,10 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  gap: 16px;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
 }

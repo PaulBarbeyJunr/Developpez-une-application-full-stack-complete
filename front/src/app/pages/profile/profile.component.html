@@ -1,0 +1,55 @@
+<div class="profile-container" *ngIf="profile">
+  <h1>Profil utilisateur</h1>
+
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="profile-form">
+    <input type="text" formControlName="username" placeholder="Username" />
+    <input type="email" formControlName="email" placeholder="email@email.fr" />
+    <input
+      type="password"
+      formControlName="password"
+      placeholder="Mot de passe (laisser vide pour ne pas changer)"
+    />
+
+    <small
+      class="error"
+      *ngIf="
+        profileForm.get('password')?.touched &&
+        profileForm.get('password')?.invalid
+      "
+    >
+      Mot de passe : 8 caractères minimum, avec majuscule, minuscule, chiffre et
+      caractère spécial.
+    </small>
+
+    <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+    <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
+
+    <button type="submit" [disabled]="profileForm.invalid || isSubmitting">
+      Sauvegarder
+    </button>
+  </form>
+
+  <hr />
+
+  <h2>Abonnements</h2>
+
+  <div class="subscriptions-list" *ngIf="profile.subscriptions.length > 0; else noSub">
+    <article class="topic-card" *ngFor="let topic of profile.subscriptions">
+      <h3>{{ topic.title }}</h3>
+      <p>{{ topic.description }}</p>
+      <button mat-raised-button color="primary" disabled>
+        Se désabonner
+      </button>
+    </article>
+  </div>
+
+  <ng-template #noSub>
+    <p>Aucun abonnement pour le moment.</p>
+  </ng-template>
+
+  <hr />
+
+  <button mat-raised-button color="warn" (click)="logout()">
+    Se déconnecter
+  </button>
+</div>

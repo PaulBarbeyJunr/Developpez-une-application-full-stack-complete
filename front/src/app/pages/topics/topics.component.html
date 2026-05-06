@@ -1,4 +1,8 @@
 <div class="topics-container">
+  <nav class="topics-nav">
+    <a routerLink="/profile">Mon profil</a>
+  </nav>
+
   <h1>Thèmes disponibles</h1>
 
   <div class="topics-list" *ngIf="topics$ | async as topics; else loading">
