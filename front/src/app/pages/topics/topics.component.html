@@ -1,0 +1,15 @@
+<div class="topics-container">
+  <h1>Thèmes disponibles</h1>
+
+  <div class="topics-list" *ngIf="topics$ | async as topics; else loading">
+    <article class="topic-card" *ngFor="let topic of topics">
+      <h2>{{ topic.title }}</h2>
+      <p>{{ topic.description }}</p>
+      <button mat-raised-button color="primary">S'abonner</button>
+    </article>
+  </div>
+
+  <ng-template #loading>
+    <p>Chargement...</p>
+  </ng-template>
+</div>
