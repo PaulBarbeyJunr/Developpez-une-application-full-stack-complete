@@ -1,0 +1,55 @@
+<div class="post-detail-container">
+  <nav class="nav">
+    <a routerLink="/feed">Retour au fil</a>
+  </nav>
+
+  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+  <article *ngIf="post; else loading">
+    <h1>{{ post.title }}</h1>
+    <p class="meta">
+      {{ post.topicTitle }} — {{ post.author }} —
+      {{ post.createdAt | date: 'dd/MM/yyyy HH:mm' }}
+    </p>
+    <p class="content">{{ post.content }}</p>
+
+    <hr />
+
+    <section class="comments">
+      <h2>Commentaires ({{ post.comments.length }})</h2>
+
+      <form
+        class="comment-form"
+        [formGroup]="commentForm"
+        (ngSubmit)="onSubmitComment()"
+      >
+        <textarea
+          formControlName="content"
+          rows="3"
+          placeholder="Ajouter un commentaire..."
+        ></textarea>
+        <p class="error" *ngIf="commentError">{{ commentError }}</p>
+        <button
+          type="submit"
+          [disabled]="commentForm.invalid || isSubmittingComment"
+        >
+          Envoyer
+        </button>
+      </form>
+
+      <p *ngIf="post.comments.length === 0">Aucun commentaire pour le moment.</p>
+
+      <div class="comment" *ngFor="let comment of post.comments">
+        <p class="comment-meta">
+          {{ comment.author }} —
+          {{ comment.createdAt | date: 'dd/MM/yyyy HH:mm' }}
+        </p>
+        <p class="comment-content">{{ comment.content }}</p>
+      </div>
+    </section>
+  </article>
+
+  <ng-template #loading>
+    <p *ngIf="isLoading">Chargement...</p>
+  </ng-template>
+</div>

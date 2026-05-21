@@ -1,5 +1,34 @@
 # P6-Full-Stack-reseau-dev
 
+Application full-stack **MDD (Monde de Dév)** : back-end Java/Spring Boot + front-end Angular.
+
+## Prérequis
+
+- Java 11
+- Maven (le wrapper `mvnw` est fourni)
+- Node.js / npm
+- MySQL en écoute sur le port 3306
+
+## Back
+
+Le back-end est une API REST Spring Boot située dans le dossier `back/`.
+
+### Base de données
+
+L'application se connecte à une base MySQL `mdd_db` (créée automatiquement au démarrage
+grâce au paramètre `createDatabaseIfNotExist=true`). La configuration se trouve dans
+`back/src/main/resources/application.properties`.
+
+### Démarrer le serveur
+
+Depuis le dossier `back/` :
+
+```
+./mvnw spring-boot:run
+```
+
+L'API démarre sur `http://localhost:8080/`.
+
 ## Front
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.

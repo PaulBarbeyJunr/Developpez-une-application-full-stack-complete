@@ -39,7 +39,7 @@ export class RegisterComponent {
     this.errorMessage = '';
 
     this.authService.register(this.registerForm.value).subscribe({
-      next: () => this.router.navigate(['/topics']),
+      next: () => this.router.navigate(['/feed']),
       error: (err) => {
         this.errorMessage =
           err.error?.message || "Erreur lors de l'inscription";

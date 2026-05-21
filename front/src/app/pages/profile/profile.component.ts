@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
+import { TopicService } from '../../core/services/topic.service';
 import { UserService } from '../../core/services/user.service';
+import { Topic } from '../../core/models/topic.interface';
 import { UserProfile } from '../../core/models/user-profile.interface';
 
 const PASSWORD_PATTERN =
@@ -23,6 +25,7 @@ export class ProfileComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
+    private topicService: TopicService,
     private authService: AuthService,
     private router: Router
   ) {
@@ -87,6 +90,22 @@ export class ProfileComponent implements OnInit {
         this.errorMessage =
           err.error?.message || 'Erreur lors de la mise à jour';
         this.isSubmitting = false;
+      },
+    });
+  }
+
+  unsubscribe(topic: Topic): void {
+    this.topicService.unsubscribe(topic.id).subscribe({
+      next: () => {
+        if (this.profile) {
+          this.profile.subscriptions = this.profile.subscriptions.filter(
+            (t) => t.id !== topic.id
+          );
+        }
+      },
+      error: (err) => {
+        this.errorMessage =
+          err.error?.message || 'Impossible de se désabonner';
       },
     });
   }

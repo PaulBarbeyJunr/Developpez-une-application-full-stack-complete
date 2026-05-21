@@ -1,0 +1,40 @@
+<div class="feed-container">
+  <nav class="feed-nav">
+    <a routerLink="/topics">Thèmes</a>
+    <a routerLink="/profile">Mon profil</a>
+  </nav>
+
+  <header class="feed-header">
+    <h1>Fil d'actualité</h1>
+    <div class="feed-actions">
+      <button mat-raised-button color="primary" routerLink="/posts/create">
+        Créer un article
+      </button>
+      <button mat-stroked-button (click)="toggleSort()">
+        Trier : {{ sort === 'desc' ? 'plus récent' : 'plus ancien' }}
+      </button>
+    </div>
+  </header>
+
+  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+  <div *ngIf="!isLoading; else loading">
+    <p *ngIf="posts.length === 0">
+      Aucun article. Abonnez-vous à des thèmes pour voir des articles.
+    </p>
+
+    <article class="post-card" *ngFor="let post of posts">
+      <h2>{{ post.title }}</h2>
+      <p class="meta">
+        {{ post.topicTitle }} — {{ post.author }} —
+        {{ post.createdAt | date: 'dd/MM/yyyy HH:mm' }}
+      </p>
+      <p class="excerpt">{{ post.content }}</p>
+      <a [routerLink]="['/posts', post.id]">Lire l'article</a>
+    </article>
+  </div>
+
+  <ng-template #loading>
+    <p>Chargement...</p>
+  </ng-template>
+</div>

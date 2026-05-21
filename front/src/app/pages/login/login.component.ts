@@ -32,7 +32,7 @@ export class LoginComponent {
     this.errorMessage = '';
 
     this.authService.login(this.loginForm.value).subscribe({
-      next: () => this.router.navigate(['/topics']),
+      next: () => this.router.navigate(['/feed']),
       error: (err) => {
         this.errorMessage =
           err.error?.message || 'Identifiants invalides';

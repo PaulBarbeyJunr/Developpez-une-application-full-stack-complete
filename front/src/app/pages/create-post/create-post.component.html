@@ -1,0 +1,35 @@
+<div class="create-post-container">
+  <nav class="nav">
+    <a routerLink="/feed">Retour au fil</a>
+  </nav>
+
+  <h1>Créer un article</h1>
+
+  <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+    <label>
+      Thème
+      <select formControlName="topicId">
+        <option [ngValue]="null" disabled>Sélectionner un thème</option>
+        <option *ngFor="let topic of topics" [ngValue]="topic.id">
+          {{ topic.title }}
+        </option>
+      </select>
+    </label>
+
+    <label>
+      Titre
+      <input type="text" formControlName="title" />
+    </label>
+
+    <label>
+      Contenu
+      <textarea formControlName="content" rows="8"></textarea>
+    </label>
+
+    <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+    <button type="submit" [disabled]="postForm.invalid || isSubmitting">
+      Publier
+    </button>
+  </form>
+</div>

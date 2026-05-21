@@ -1,15 +1,25 @@
 <div class="topics-container">
   <nav class="topics-nav">
+    <a routerLink="/feed">Fil d'actualité</a>
     <a routerLink="/profile">Mon profil</a>
   </nav>
 
   <h1>Thèmes disponibles</h1>
 
-  <div class="topics-list" *ngIf="topics$ | async as topics; else loading">
+  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+  <div class="topics-list" *ngIf="!isLoading; else loading">
     <article class="topic-card" *ngFor="let topic of topics">
       <h2>{{ topic.title }}</h2>
       <p>{{ topic.description }}</p>
-      <button mat-raised-button color="primary">S'abonner</button>
+      <button
+        mat-raised-button
+        color="primary"
+        [disabled]="topic.isSubscribed"
+        (click)="subscribe(topic)"
+      >
+        {{ topic.isSubscribed ? 'Déjà abonné' : "S'abonner" }}
+      </button>
     </article>
   </div>
 

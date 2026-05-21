@@ -1,4 +1,9 @@
 <div class="profile-container" *ngIf="profile">
+  <nav class="profile-nav">
+    <a routerLink="/feed">Fil d'actualité</a>
+    <a routerLink="/topics">Thèmes</a>
+  </nav>
+
   <h1>Profil utilisateur</h1>
 
   <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="profile-form">
@@ -37,7 +42,7 @@
     <article class="topic-card" *ngFor="let topic of profile.subscriptions">
       <h3>{{ topic.title }}</h3>
       <p>{{ topic.description }}</p>
-      <button mat-raised-button color="primary" disabled>
+      <button mat-raised-button color="primary" (click)="unsubscribe(topic)">
         Se désabonner
       </button>
     </article>

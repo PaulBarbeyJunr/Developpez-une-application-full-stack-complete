@@ -7,8 +7,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
+import { CreatePostComponent } from './pages/create-post/create-post.component';
+import { FeedComponent } from './pages/feed/feed.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { PostDetailComponent } from './pages/post-detail/post-detail.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { TopicsComponent } from './pages/topics/topics.component';
@@ -21,6 +25,10 @@ import { TopicsComponent } from './pages/topics/topics.component';
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
+    FeedComponent,
+    CreatePostComponent,
+    PostDetailComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

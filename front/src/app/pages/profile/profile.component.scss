@@ -13,6 +13,19 @@
   }
 }
 
+.profile-nav {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-bottom: 16px;
+
+  a {
+    text-decoration: none;
+    color: #1976d2;
+    font-weight: 500;
+  }
+}
+
 .profile-form {
   display: flex;
   flex-direction: column;
