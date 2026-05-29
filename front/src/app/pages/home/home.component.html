@@ -1,12 +1,21 @@
-<div class="center">
-  <img src="/assets/logo_p6.png" alt="logo" />
-  <h1>Welcome to MDD</h1>
+<div
+  class="flex min-h-screen flex-col items-center justify-center gap-10 px-6"
+>
+  <img src="assets/logo_p6.png" alt="MDD" class="w-64 max-w-full sm:w-80" />
 
-  <div class="actions">
-    <button mat-raised-button color="primary" routerLink="/login">
+  <div class="flex w-full max-w-md flex-col gap-4 sm:flex-row sm:justify-center">
+    <button
+      type="button"
+      routerLink="/login"
+      class="rounded-md border border-gray-400 px-8 py-2 font-medium text-gray-800 transition hover:bg-gray-100"
+    >
       Se connecter
     </button>
-    <button mat-raised-button color="accent" routerLink="/register">
+    <button
+      type="button"
+      routerLink="/register"
+      class="rounded-md border border-gray-400 px-8 py-2 font-medium text-gray-800 transition hover:bg-gray-100"
+    >
       S'inscrire
     </button>
   </div>

@@ -1,26 +1,66 @@
-<div class="auth-container">
-  <h1>Connexion</h1>
+<div class="min-h-screen flex flex-col">
+  <!-- Header avec logo : visible uniquement sur tablette/desktop -->
+  <div class="hidden sm:block">
+    <app-header></app-header>
+  </div>
 
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <label>
-      Email ou nom d'utilisateur
-      <input type="text" formControlName="identifier" />
-    </label>
-
-    <label>
-      Mot de passe
-      <input type="password" formControlName="password" />
-    </label>
-
-    <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
-
-    <button type="submit" [disabled]="loginForm.invalid || isSubmitting">
-      Se connecter
+  <main class="flex-1 px-4 py-6 sm:px-8">
+    <!-- Bouton retour -->
+    <button
+      type="button"
+      class="text-gray-700"
+      aria-label="Retour"
+      (click)="goBack()"
+    >
+      <mat-icon>arrow_back</mat-icon>
     </button>
-  </form>
 
-  <p>
-    Pas encore de compte ?
-    <a routerLink="/register">S'inscrire</a>
-  </p>
+    <!-- Logo : visible uniquement sur mobile -->
+    <div class="flex justify-center sm:hidden">
+      <img src="assets/logo_p6.png" alt="MDD" class="h-20 w-auto" />
+    </div>
+
+    <div class="mx-auto w-full max-w-md">
+      <h1 class="mt-2 mb-8 text-center text-2xl font-medium text-gray-800">
+        Connexion
+      </h1>
+
+      <form
+        [formGroup]="loginForm"
+        (ngSubmit)="onSubmit()"
+        class="flex flex-col gap-2"
+      >
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Email ou nom d'utilisateur</mat-label>
+          <input matInput type="text" formControlName="identifier" />
+          <mat-error *ngIf="loginForm.get('identifier')?.invalid">
+            Ce champ est obligatoire.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Mot de passe</mat-label>
+          <input matInput type="password" formControlName="password" />
+          <mat-error *ngIf="loginForm.get('password')?.invalid">
+            Ce champ est obligatoire.
+          </mat-error>
+        </mat-form-field>
+
+        <p *ngIf="errorMessage" class="text-center text-sm text-red-600">
+          {{ errorMessage }}
+        </p>
+
+        <div class="mt-2 flex justify-center">
+          <button
+            type="submit"
+            class="rounded-md bg-mdd px-6 py-2 font-medium text-white transition hover:bg-mdd-dark disabled:cursor-not-allowed disabled:opacity-60"
+            [disabled]="loginForm.invalid || isSubmitting"
+          >
+            Se connecter
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </main>
 </div>

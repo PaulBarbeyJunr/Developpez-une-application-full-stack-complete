@@ -5,7 +5,6 @@ import { TopicService } from '../../core/services/topic.service';
 @Component({
   selector: 'app-topics',
   templateUrl: './topics.component.html',
-  styleUrls: ['./topics.component.scss'],
 })
 export class TopicsComponent implements OnInit {
   topics: Topic[] = [];

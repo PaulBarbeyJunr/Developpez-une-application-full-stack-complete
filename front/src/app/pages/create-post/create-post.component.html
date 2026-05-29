@@ -1,35 +1,62 @@
-<div class="create-post-container">
-  <nav class="nav">
-    <a routerLink="/feed">Retour au fil</a>
-  </nav>
-
-  <h1>Créer un article</h1>
-
-  <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
-    <label>
-      Thème
-      <select formControlName="topicId">
-        <option [ngValue]="null" disabled>Sélectionner un thème</option>
-        <option *ngFor="let topic of topics" [ngValue]="topic.id">
-          {{ topic.title }}
-        </option>
-      </select>
-    </label>
-
-    <label>
-      Titre
-      <input type="text" formControlName="title" />
-    </label>
-
-    <label>
-      Contenu
-      <textarea formControlName="content" rows="8"></textarea>
-    </label>
-
-    <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
-
-    <button type="submit" [disabled]="postForm.invalid || isSubmitting">
-      Publier
+<div class="mx-auto max-w-4xl px-4 py-6 sm:px-8">
+  <!-- Header : fleche retour + titre centre -->
+  <div class="relative mb-10 flex items-center">
+    <button
+      type="button"
+      class="text-gray-700"
+      aria-label="Retour"
+      (click)="goBack()"
+    >
+      <mat-icon>arrow_back</mat-icon>
     </button>
+    <h1
+      class="absolute left-1/2 -translate-x-1/2 text-xl font-bold text-gray-900"
+    >
+      Créer un nouvel article
+    </h1>
+  </div>
+
+  <form
+    [formGroup]="postForm"
+    (ngSubmit)="onSubmit()"
+    class="mx-auto flex w-full max-w-md flex-col gap-5"
+  >
+    <select
+      formControlName="topicId"
+      class="rounded-lg border border-mdd bg-white px-4 py-3 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-mdd"
+    >
+      <option [ngValue]="null" disabled>Sélectionner un thème</option>
+      <option *ngFor="let topic of topics" [ngValue]="topic.id">
+        {{ topic.title }}
+      </option>
+    </select>
+
+    <input
+      type="text"
+      formControlName="title"
+      placeholder="Titre de l'article"
+      class="rounded-lg border border-mdd px-4 py-3 text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-mdd"
+    />
+
+    <textarea
+      formControlName="content"
+      rows="8"
+      placeholder="Contenu de l'article"
+      class="resize-none rounded-lg border border-mdd px-4 py-3 text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-mdd"
+    ></textarea>
+
+    <p *ngIf="errorMessage" class="text-center text-sm text-red-600">
+      {{ errorMessage }}
+    </p>
+
+    <div class="mt-2 flex justify-center">
+      <button
+        type="submit"
+        [disabled]="postForm.invalid || isSubmitting"
+        class="rounded-md bg-mdd px-10 py-2 font-medium text-white transition hover:bg-mdd-dark disabled:cursor-not-allowed disabled:opacity-60"
+      >
+        Créer
+      </button>
+    </div>
   </form>
 </div>

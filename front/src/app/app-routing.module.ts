@@ -12,9 +12,13 @@ import { RegisterComponent } from './pages/register/register.component';
 import { TopicsComponent } from './pages/topics/topics.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: '', component: HomeComponent, data: { hideNavbar: true } },
+  { path: 'login', component: LoginComponent, data: { hideNavbar: true } },
+  {
+    path: 'register',
+    component: RegisterComponent,
+    data: { hideNavbar: true },
+  },
   { path: 'topics', component: TopicsComponent, canActivate: [AuthGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'feed', component: FeedComponent, canActivate: [AuthGuard] },
@@ -28,7 +32,11 @@ const routes: Routes = [
     component: PostDetailComponent,
     canActivate: [AuthGuard],
   },
-  { path: '**', component: NotFoundComponent },
+  {
+    path: '**',
+    component: NotFoundComponent,
+    data: { hideNavbar: true },
+  },
 ];
 
 @NgModule({

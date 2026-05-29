@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Topic } from '../../core/models/topic.interface';
@@ -8,7 +9,6 @@ import { TopicService } from '../../core/services/topic.service';
 @Component({
   selector: 'app-create-post',
   templateUrl: './create-post.component.html',
-  styleUrls: ['./create-post.component.scss'],
 })
 export class CreatePostComponent implements OnInit {
   postForm: FormGroup;
@@ -20,7 +20,8 @@ export class CreatePostComponent implements OnInit {
     private fb: FormBuilder,
     private postService: PostService,
     private topicService: TopicService,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) {
     this.postForm = this.fb.group({
       topicId: [null, [Validators.required]],
@@ -54,5 +55,9 @@ export class CreatePostComponent implements OnInit {
         this.isSubmitting = false;
       },
     });
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }

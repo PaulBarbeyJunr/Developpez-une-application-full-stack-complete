@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { PostDetail } from '../../core/models/post.interface';
@@ -7,7 +8,6 @@ import { PostService } from '../../core/services/post.service';
 @Component({
   selector: 'app-post-detail',
   templateUrl: './post-detail.component.html',
-  styleUrls: ['./post-detail.component.scss'],
 })
 export class PostDetailComponent implements OnInit {
   post: PostDetail | null = null;
@@ -21,7 +21,8 @@ export class PostDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private postService: PostService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private location: Location
   ) {
     this.commentForm = this.fb.group({
       content: ['', [Validators.required]],
@@ -68,5 +69,9 @@ export class PostDetailComponent implements OnInit {
           this.isSubmittingComment = false;
         },
       });
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }

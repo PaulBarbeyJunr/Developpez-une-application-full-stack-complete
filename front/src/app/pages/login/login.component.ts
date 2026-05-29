@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
   loginForm: FormGroup;
@@ -16,7 +16,8 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) {
     this.loginForm = this.fb.group({
       identifier: ['', [Validators.required]],
@@ -34,10 +35,13 @@ export class LoginComponent {
     this.authService.login(this.loginForm.value).subscribe({
       next: () => this.router.navigate(['/feed']),
       error: (err) => {
-        this.errorMessage =
-          err.error?.message || 'Identifiants invalides';
+        this.errorMessage = err.error?.message || 'Identifiants invalides';
         this.isSubmitting = false;
       },
     });
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }
