@@ -1,0 +1,100 @@
+<div *ngIf="profile" class="mx-auto max-w-5xl px-4 py-6 sm:px-8">
+  <!-- Section profil -->
+  <section>
+    <h1 class="mb-6 text-center text-xl font-bold text-gray-900">
+      Profil utilisateur
+    </h1>
+
+    <form
+      [formGroup]="profileForm"
+      (ngSubmit)="onSubmit()"
+      class="mx-auto flex w-full max-w-md flex-col gap-4"
+    >
+      <input
+        type="text"
+        formControlName="username"
+        placeholder="Username"
+        class="rounded-lg border border-mdd px-4 py-3 text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-mdd"
+      />
+
+      <input
+        type="email"
+        formControlName="email"
+        placeholder="email@email.fr"
+        class="rounded-lg border border-mdd px-4 py-3 text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-mdd"
+      />
+
+      <input
+        type="password"
+        formControlName="password"
+        placeholder="Mot de passe"
+        class="rounded-lg border border-mdd px-4 py-3 text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-mdd"
+      />
+
+      <small
+        *ngIf="
+          profileForm.get('password')?.touched &&
+          profileForm.get('password')?.invalid
+        "
+        class="text-center text-xs text-red-600"
+      >
+        Mot de passe : 8 caractères min., avec majuscule, minuscule, chiffre et
+        caractère spécial.
+      </small>
+
+      <p *ngIf="errorMessage" class="text-center text-sm text-red-600">
+        {{ errorMessage }}
+      </p>
+      <p *ngIf="successMessage" class="text-center text-sm text-green-600">
+        {{ successMessage }}
+      </p>
+
+      <div class="mt-2 flex justify-center">
+        <button
+          type="submit"
+          [disabled]="profileForm.invalid || isSubmitting"
+          class="rounded-md bg-mdd px-8 py-2 font-medium text-white transition hover:bg-mdd-dark disabled:cursor-not-allowed disabled:opacity-60"
+        >
+          Sauvegarder
+        </button>
+      </div>
+    </form>
+  </section>
+
+  <hr class="my-10 border-gray-300" />
+
+  <!-- Section abonnements -->
+  <section>
+    <h2 class="mb-6 text-center text-xl font-bold text-gray-900">
+      Abonnements
+    </h2>
+
+    <p
+      *ngIf="profile.subscriptions.length === 0"
+      class="text-center text-gray-600"
+    >
+      Aucun abonnement pour le moment.
+    </p>
+
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+      <article
+        *ngFor="let topic of profile.subscriptions"
+        class="flex flex-col gap-3 rounded-lg bg-gray-100 p-5"
+      >
+        <h3 class="text-base font-bold text-gray-900">{{ topic.title }}</h3>
+
+        <p class="text-sm text-gray-700">{{ topic.description }}</p>
+
+        <div class="mt-2 flex justify-center">
+          <button
+            type="button"
+            class="rounded-md bg-mdd px-6 py-2 font-medium text-white transition hover:bg-mdd-dark"
+            (click)="unsubscribe(topic)"
+          >
+            Se désabonner
+          </button>
+        </div>
+      </article>
+    </div>
+  </section>
+</div>

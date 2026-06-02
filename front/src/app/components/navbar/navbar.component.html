@@ -1,0 +1,101 @@
+<nav
+  class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between border-b border-gray-200 bg-white px-4 py-2 sm:px-8"
+>
+  <!-- Logo -->
+  <a routerLink="/feed">
+    <img src="assets/logo_p6.png" alt="MDD" class="h-9 w-auto sm:h-11" />
+  </a>
+
+  <!-- Liens : desktop / tablette -->
+  <div class="hidden items-center gap-6 sm:flex">
+    <a
+      (click)="logout()"
+      class="cursor-pointer font-medium text-red-600 hover:underline"
+    >
+      Se déconnecter
+    </a>
+    <a
+      routerLink="/feed"
+      routerLinkActive="text-mdd"
+      class="font-medium text-gray-700 hover:text-mdd"
+    >
+      Articles
+    </a>
+    <a
+      routerLink="/topics"
+      routerLinkActive="text-mdd"
+      class="font-medium text-gray-700 hover:text-mdd"
+    >
+      Thèmes
+    </a>
+    <a
+      routerLink="/profile"
+      routerLinkActive="ring-2 ring-mdd"
+      class="flex h-10 w-10 items-center justify-center rounded-full bg-gray-200 text-gray-600"
+      aria-label="Mon profil"
+    >
+      <mat-icon>person</mat-icon>
+    </a>
+  </div>
+
+  <!-- Bouton burger : mobile -->
+  <button
+    type="button"
+    class="text-gray-700 sm:hidden"
+    aria-label="Ouvrir le menu"
+    (click)="toggleMenu()"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+</nav>
+
+<!-- Drawer mobile -->
+<div
+  *ngIf="isMenuOpen"
+  class="fixed inset-0 z-50 bg-black/40 sm:hidden"
+  (click)="closeMenu()"
+></div>
+
+<aside
+  class="fixed top-0 right-0 z-50 flex h-full w-64 flex-col bg-white shadow-lg transition-transform duration-300 sm:hidden"
+  [class.translate-x-0]="isMenuOpen"
+  [class.translate-x-full]="!isMenuOpen"
+>
+  <div class="flex flex-col gap-6 p-6 text-right">
+    <a
+      (click)="logout()"
+      class="cursor-pointer font-medium text-red-600"
+    >
+      Se déconnecter
+    </a>
+    <a
+      routerLink="/feed"
+      routerLinkActive="text-mdd"
+      (click)="closeMenu()"
+      class="font-medium text-gray-700"
+    >
+      Articles
+    </a>
+    <a
+      routerLink="/topics"
+      routerLinkActive="text-mdd"
+      (click)="closeMenu()"
+      class="font-medium text-gray-700"
+    >
+      Thèmes
+    </a>
+  </div>
+
+  <a
+    routerLink="/profile"
+    (click)="closeMenu()"
+    class="mt-auto mb-6 mr-6 flex justify-end"
+    aria-label="Mon profil"
+  >
+    <span
+      class="flex h-10 w-10 items-center justify-center rounded-full bg-gray-200 text-gray-600"
+    >
+      <mat-icon>person</mat-icon>
+    </span>
+  </a>
+</aside>

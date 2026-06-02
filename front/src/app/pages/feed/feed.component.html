@@ -1,0 +1,56 @@
+<div class="mx-auto max-w-5xl px-4 py-6 sm:px-8">
+  <!-- Barre d'actions -->
+  <div class="mb-8 flex flex-col items-stretch gap-4 sm:flex-row sm:items-center sm:justify-between">
+    <button
+      type="button"
+      routerLink="/posts/create"
+      class="rounded-md bg-mdd px-6 py-2 font-medium text-white transition hover:bg-mdd-dark"
+    >
+      Créer un article
+    </button>
+
+    <button
+      type="button"
+      class="flex items-center gap-1 self-end text-gray-700 hover:text-mdd"
+      (click)="toggleSort()"
+    >
+      <span>Trier par</span>
+      <mat-icon>{{
+        sort === 'desc' ? 'arrow_downward' : 'arrow_upward'
+      }}</mat-icon>
+    </button>
+  </div>
+
+  <p *ngIf="errorMessage" class="text-center text-sm text-red-600">
+    {{ errorMessage }}
+  </p>
+
+  <div *ngIf="!isLoading; else loading">
+    <p *ngIf="posts.length === 0" class="text-center text-gray-600">
+      Aucun article. Abonnez-vous à des thèmes pour voir des articles.
+    </p>
+
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+      <article
+        *ngFor="let post of posts"
+        [routerLink]="['/posts', post.id]"
+        class="cursor-pointer rounded-lg bg-gray-100 p-5 transition hover:bg-gray-200"
+      >
+        <h2 class="mb-3 text-lg font-bold text-gray-900">{{ post.title }}</h2>
+
+        <div class="mb-2 flex items-center gap-8 text-sm text-gray-700">
+          <span>{{ post.createdAt | date: 'dd/MM/yyyy' }}</span>
+          <span>{{ post.author }}</span>
+        </div>
+
+        <p class="line-clamp-3 text-sm text-gray-700">
+          {{ post.content }}
+        </p>
+      </article>
+    </div>
+  </div>
+
+  <ng-template #loading>
+    <p class="text-center text-gray-600">Chargement...</p>
+  </ng-template>
+</div>
